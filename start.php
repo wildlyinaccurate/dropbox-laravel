@@ -7,8 +7,11 @@ Laravel\Event::listen('laravel.started: dropbox', function()
 	// Register a simple autoload function
 	spl_autoload_register(function($class)
 	{
-		$class = str_replace('\\', '/', $class);
-		require_once(__DIR__ . '/' . $class . '.php');
+		if (substr($class, 0, 7) === 'Dropbox')
+		{
+			$class = str_replace('\\', '/', $class);
+			require_once(__DIR__ . '/' . $class . '.php');
+		}
 	});
 
 	$app_key = Laravel\Config::get('dropbox::config.app_key');
