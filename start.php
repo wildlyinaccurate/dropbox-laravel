@@ -29,8 +29,10 @@ Laravel\Event::listen('laravel.started: dropbox', function()
 	}
 
 	// Check whether to use HTTPS and set the callback URL
-	$protocol = ( ! empty($_SERVER['HTTPS'])) ? 'https' : 'http';
-	$callback = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$protocol = (isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS'])) ? 'https' : 'http';
+	$request_uri = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '/';
+	$http_host = (isset($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : '127.0.0.1';
+	$callback = $protocol . '://' . $http_host . $request_uri;
 
 	// Instantiate the required Dropbox objects
 	$encrypter = new \Dropbox\OAuth\Storage\Encrypter($encryption_key);
