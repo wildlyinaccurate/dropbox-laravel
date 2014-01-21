@@ -1,3 +1,5 @@
+### Laravel 4 users: Rather than use this bundle, you should install `benthedesigner/dropbox` with composer.
+
 This bundle allows your Laravel application to access the Dropbox API via a Dropbox App. If you don't have a Dropbox App, you can create one at https://www.dropbox.com/developers
 
 ## Installation
